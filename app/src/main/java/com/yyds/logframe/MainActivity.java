@@ -14,6 +14,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         LogUtils.v("MainActivity");
-        LogUtils.wtf(DeviceDetailInfo.getDevicesInfo(this, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
+        LogUtils.v("111111111111");
+        LogUtils.d("222222222222");
+        LogUtils.i("333333333333");
+        LogUtils.e("444444444444");
+        LogUtils.w("555555555555");
+        LogUtils.wtf("666666666666");
     }
 }
