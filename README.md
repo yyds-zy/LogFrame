@@ -34,3 +34,61 @@ LogToFile.isDeleteLogFile() true 为超过
 LogToFile.deleteFile();
 ### 获取文件列表
 LogToFile.getFileList();
+
+### Usage
+----
+
+#### Gradle
+
+```groovy
+allprojects {
+   repositories {
+   maven { url 'https://jitpack.io' }
+   }
+}
+
+dependencies {
+   implementation 'com.github.yyds-zy:LogFrame:1.0.0'
+}
+```
+
+#### Maven 
+
+```xml
+
+<repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+  
+<dependency>
+      <groupId>com.github.yyds-zy</groupId>
+      <artifactId>LogFrame</artifactId>
+      <version>1.0.0</version>
+</dependency>
+
+```
+
+Use it in your own code:
+
+```java
+        //初始化日志框架
+        LogUtils.initialize(application,BuildConfig.DEBUG);
+        //设置日志级别
+        LogUtils.setLogLevel(5);
+        //输出设备详细信息
+        LogUtils.wtf(DeviceDetailInfo.getDevicesInfo(this, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
+        // 判断是否超过设置日志文件保留时长
+        if (LogToFile.isDeleteLogFile()) {
+            LogToFile.deleteFile();
+        }
+        LogUtils.v("MainActivity");
+        LogUtils.v("111111111111");
+        LogUtils.d("222222222222");
+        LogUtils.i("333333333333");
+        LogUtils.e("444444444444");
+        LogUtils.w("555555555555");
+        LogUtils.wtf("666666666666");
+```	
