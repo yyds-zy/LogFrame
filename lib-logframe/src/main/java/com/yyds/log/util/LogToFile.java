@@ -25,6 +25,25 @@ public class LogToFile {
     public static List<File> mFileList = new ArrayList<>();
     private static Date date = new Date();//因为log日志是使用日期命名的，使用静态成员变量主要是为了在整个程序运行期间只存在一个.log文件中;
     private static Context mContent;
+    //日志文件保留时长  默认7天
+    public static int FILE_SAVE_DAYS = 7;
+
+    /**
+     * 设置日志文件保留时长
+     * @param saveDays
+     */
+    public static void setFileSaveDays(int saveDays){
+        FILE_SAVE_DAYS = saveDays;
+    }
+
+    /**
+     * 获取日志文件保留时长
+     * @return
+     */
+    public static int getFileSaveDays() {
+        return FILE_SAVE_DAYS;
+    }
+
     /**
      * 获得文件存储路径
      *
@@ -48,6 +67,11 @@ public class LogToFile {
         logPath = getFilePath(context);//获得文件储存路径
     }
 
+    /**
+     * 文件是否存在
+     * @param context
+     * @return
+     */
     public static boolean isExistsFile(Context context) {
         File dir = new File(context.getExternalCacheDir().getAbsoluteFile() + savePath);
         if (!dir.exists()) {
@@ -167,5 +191,40 @@ public class LogToFile {
             }
         }
         return mFileList;
+    }
+
+    /**
+     * 是否删除日志文件
+     * @return true delete  false no_delete
+     */
+    public static boolean isDeleteLogFile() {
+        List<File> fileList = getFileList();
+        if (fileList == null)
+            return false;
+        if (fileList.size() > getFileSaveDays()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     *  删除日志文件
+     */
+    public static void deleteFile(){
+        List<File> fileList = getFileList();
+        if (fileList == null) return;
+        if (fileList.size() > getFileSaveDays()) {
+            for (File file : fileList) {
+                if (file.exists()) {
+                    String fileName = file.getName();
+                    String format = dateFormatFile.format(date);
+                    String fileNameTimes = fileName.substring(fileName.indexOf("_") + 1, fileName.indexOf(".log"));
+                    if (!format.equals(fileNameTimes)) {
+                        file.delete();
+                    }
+                }
+            }
+        }
     }
 }
