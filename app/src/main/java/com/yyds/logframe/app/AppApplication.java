@@ -20,7 +20,7 @@ public class AppApplication extends Application {
         //init log frame
         LogUtils.initialize(application,BuildConfig.DEBUG);
         //setting log level
-        LogUtils.setLogLevel(0);
+        LogUtils.setLogLevel(5);
         //deviceInfo
         LogUtils.wtf(DeviceDetailInfo.getDevicesInfo(this, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
     }

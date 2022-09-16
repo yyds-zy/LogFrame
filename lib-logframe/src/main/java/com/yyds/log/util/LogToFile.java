@@ -70,32 +70,26 @@ public class LogToFile {
     private static final char WTF = 'f';
 
     public static void v(String tag, String msg) {
-        Log.v(TAG, msg);
         writeToFile(VERBOSE, tag, msg);
     }
 
     public static void d(String tag, String msg) {
-        Log.d(TAG, msg);
         writeToFile(DEBUG, tag, msg);
     }
 
     public static void i(String tag, String msg) {
-        Log.i(TAG, msg);
         writeToFile(INFO, tag, msg);
     }
 
     public static void w(String tag, String msg) {
-        Log.w(TAG, msg);
         writeToFile(WARN, tag, msg);
     }
 
     public static void e(String tag, String msg) {
-        Log.e(TAG, msg);
         writeToFile(ERROR, tag, msg);
     }
 
     public static void wtf(String tag, String msg) {
-        Log.wtf(TAG, msg);
         writeToFile(WTF, tag, msg);
     }
 

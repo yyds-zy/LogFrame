@@ -1,6 +1,7 @@
 package com.yyds.log.util;
 
 import android.content.Context;
+import android.util.Log;
 
 public class LogUtils {
 
@@ -36,12 +37,10 @@ public class LogUtils {
      * 初始化,在自定义Application类调用
      *
      * @param isDebug 是否打印log,建议传入BuildConfig.DEBUG
-     *                isDebug = true 打印 且 保存   false 不打印且不创建日志文件
+     *                isDebug = true 打印 且 创建日志文件   false 不打印 但是 创建日志文件
      */
     public static void initialize(Context context,boolean isDebug) {
-        if (isDebug) {
-            LogToFile.init(context);
-        }
+        LogToFile.init(context);
         sIsDebug = isDebug;
     }
 
@@ -72,14 +71,14 @@ public class LogUtils {
     }
 
     public static void e(String message) {
-        if (!isDebuggable())
-            return;
-        if (mLog_level > ERROR)
-            return;
-
-        // Throwable instance must be created before any methods
-        getMethodNames(new Throwable().getStackTrace());
-        LogToFile.e(TAG, createLog(message));
+        if (mLog_level <= ERROR) {
+            getMethodNames(new Throwable().getStackTrace());
+            String log = createLog(message);
+            if (isDebuggable()) {
+                Log.e(TAG,log);
+            }
+            LogToFile.e(TAG, log);
+        }
     }
 
     public static void e(Throwable e) {
@@ -89,63 +88,68 @@ public class LogUtils {
     }
 
     public static void e(String message, Throwable e) {
-        if (!isDebuggable())
-            return;
-        if (mLog_level > ERROR)
-            return;
-
-        // Throwable instance must be created before any methods
-        getMethodNames(e.getStackTrace());
-        LogToFile.e(TAG, createLog(message));
+        if (mLog_level <= ERROR) {
+            getMethodNames(e.getStackTrace());
+            String log = createLog(message);
+            if (isDebuggable()) {
+                Log.e(TAG,log,e);
+            }
+            LogToFile.e(TAG, log + e.getMessage());
+        }
     }
 
     public static void i(String message) {
-        if (!isDebuggable())
-            return;
-        if (mLog_level > INFO)
-            return;
-
-        getMethodNames(new Throwable().getStackTrace());
-        LogToFile.i(TAG, createLog(message));
+        if (mLog_level <= INFO) {
+            getMethodNames(new Throwable().getStackTrace());
+            String log = createLog(message);
+            if (isDebuggable()) {
+                Log.i(TAG,log);
+            }
+            LogToFile.i(TAG, log);
+        }
     }
 
     public static void d(String message) {
-        if (!isDebuggable())
-            return;
-        if (mLog_level > DEBUG)
-            return;
-
-        getMethodNames(new Throwable().getStackTrace());
-        LogToFile.d(TAG, createLog(message));
+        if (mLog_level <= DEBUG) {
+            getMethodNames(new Throwable().getStackTrace());
+            String log = createLog(message);
+            if (isDebuggable()) {
+                Log.d(TAG,log);
+            }
+            LogToFile.d(TAG, log);
+        }
     }
 
     public static void v(String message) {
-        if (!isDebuggable())
-            return;
-        if (mLog_level > VERBOSE)
-            return;
-
-        getMethodNames(new Throwable().getStackTrace());
-        LogToFile.v(TAG, createLog(message));
+        if (mLog_level <= VERBOSE) {
+            getMethodNames(new Throwable().getStackTrace());
+            String log = createLog(message);
+            if (isDebuggable()) {
+                Log.v(TAG,log);
+            }
+            LogToFile.v(TAG, log);
+        }
     }
 
     public static void w(String message) {
-        if (!isDebuggable())
-            return;
-        if (mLog_level > WARN)
-            return;
-
-        getMethodNames(new Throwable().getStackTrace());
-        LogToFile.w(TAG, createLog(message));
+        if (mLog_level <= WARN) {
+            getMethodNames(new Throwable().getStackTrace());
+            String log = createLog(message);
+            if (isDebuggable()) {
+                Log.w(TAG,log);
+            }
+            LogToFile.w(TAG, log);
+        }
     }
 
     public static void wtf(String message) {
-        if (!isDebuggable())
-            return;
-        if (mLog_level > FAILTAL)
-            return;
-
-        getMethodNames(new Throwable().getStackTrace());
-        LogToFile.wtf(TAG, createLog(message));
+        if (mLog_level <= FAILTAL) {
+            getMethodNames(new Throwable().getStackTrace());
+            String log = createLog(message);
+            if (isDebuggable()) {
+                Log.wtf(TAG,log);
+            }
+            LogToFile.wtf(TAG, log);
+        }
     }
 }
