@@ -2,8 +2,6 @@ package com.yyds.logframe.app;
 
 import android.app.Application;
 import com.yyds.log.manager.FlyingManager;
-import com.yyds.log.util.DeviceDetailInfo;
-import com.yyds.log.util.LogUtils;
 import com.yyds.logframe.BuildConfig;
 
 /**
