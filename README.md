@@ -99,11 +99,6 @@ Application:
         JsonUtils.with(application,BuildConfig.DEBUG)
                 .setJsonDeleteDays(5)
                 .autoDeleteJsonFile();
-        
-        
-        JsonUtils.v(json);
-        
-        CrashUtils.e(errorMsg);
 ```
 
 ```
