@@ -20,6 +20,7 @@ import java.util.Locale;
 
 public class LogToFile extends BaseFile {
 
+    public static String logPath = null;//log日志存放路径
     public static final String savePath = "/Flying/Logs";
     private static LogToFile instance;
     private LogToFile(){}
@@ -96,7 +97,6 @@ public class LogToFile extends BaseFile {
 
     @Override
     public void writeToFile(char type, String tag, String msg) {
-        logPath = getFilePath(mContent);
         if (null == logPath) {
             Log.e(TAG,"logPath == null ，未初始化LogToFile");
             return;

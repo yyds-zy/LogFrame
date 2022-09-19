@@ -20,6 +20,6 @@ public class AppApplication extends Application {
         FlyingManager.getInstance().initFrame(application,BuildConfig.DEBUG);
         //输出设备信息
         String devicesInfo = DeviceDetailInfo.getDevicesInfo(application, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
-        LogUtils.w(devicesInfo);
+        LogUtils.wtf(devicesInfo);
     }
 }

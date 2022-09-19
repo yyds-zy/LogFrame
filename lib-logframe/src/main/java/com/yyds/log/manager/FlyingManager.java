@@ -1,7 +1,6 @@
 package com.yyds.log.manager;
 
 import android.app.Application;
-import com.yyds.log.BuildConfig;
 import com.yyds.log.util.CrashUtils;
 import com.yyds.log.util.JsonUtils;
 import com.yyds.log.util.LogUtils;
@@ -40,6 +39,30 @@ public class FlyingManager {
                 .setCrashDeleteDays(5)
                 .autoDeleteCrashFile();
 
+        //初始化http请求数据框架
+        JsonUtils.with(application,isDebug)
+                .setJsonDeleteDays(5)
+                .autoDeleteJsonFile();
+    }
+
+    public void initLogFrame (Application application,boolean isDebug){
+        //初始化日志框架
+        LogUtils.with(application, isDebug)
+                .setLogLevel(5)
+                .setLogDeleteDays(5)
+                .autoDeleteLogFile();
+    }
+
+    public void initCrashFrame(Application application,boolean isDebug) {
+        // register本地异常捕捉
+        CrashHandler.register(application);
+        //初始化异常日志框架
+        CrashUtils.with(application,isDebug)
+                .setCrashDeleteDays(5)
+                .autoDeleteCrashFile();
+    }
+
+    public void initJsonFrame(Application application,boolean isDebug) {
         //初始化http请求数据框架
         JsonUtils.with(application,isDebug)
                 .setJsonDeleteDays(5)

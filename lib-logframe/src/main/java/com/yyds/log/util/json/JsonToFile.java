@@ -20,6 +20,7 @@ import java.util.Locale;
 
 public class JsonToFile extends BaseFile {
 
+    public static String logPath = null;//log日志存放路径
     public static final String savePath = "/Flying/Json";
     private static JsonToFile instance;
     private JsonToFile(){}
@@ -76,13 +77,12 @@ public class JsonToFile extends BaseFile {
 
     @Override
     public void writeToFile(char type, String tag, String msg) {
-        logPath = getFilePath(mContent);
         if (null == logPath) {
             Log.e(TAG,"logPath == null ，未初始化JsonToFile");
             return;
         }
 
-        String fileName = logPath + "/log_" + dateFormatFile.format(date) + ".log";//log日志名，使用时间命名，保证不重复  以天为单位  每天都有新的日志文件生成
+        String fileName = logPath + "/json_" + dateFormatFile.format(date) + ".log";//log日志名，使用时间命名，保证不重复  以天为单位  每天都有新的日志文件生成
         String segmentationLine = "**************************************************************";
         String log = segmentationLine + "\n" + dateFormatLog.format(new Date()) + " " + type + " " + tag + "\n" + "" + msg + "\n";//log日志内容，可以自行定制
 

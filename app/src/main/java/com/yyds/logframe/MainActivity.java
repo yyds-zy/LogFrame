@@ -22,5 +22,9 @@ public class MainActivity extends AppCompatActivity {
         LogUtils.e("444444444444");
         LogUtils.w("555555555555");
         LogUtils.wtf("666666666666");
+
+        JsonUtils.v("net data");
+
+        CrashUtils.e("404");
     }
 }

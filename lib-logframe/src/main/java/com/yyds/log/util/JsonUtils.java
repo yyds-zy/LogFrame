@@ -33,11 +33,11 @@ public class JsonUtils {
         return sIsDebug;
     }
 
-    public static void v(String errorMsg) {
+    public static void v(String httpData) {
         if (isDebuggable()) {
-            Log.v(TAG,errorMsg);
+            Log.v(TAG,httpData);
         }
-        JsonToFile.getInstance().v(TAG, errorMsg);
+        JsonToFile.getInstance().v(TAG, httpData);
     }
 
     /**

@@ -14,6 +14,7 @@ import java.util.List;
 
 public class CrashToFile extends BaseFile {
 
+    public static String logPath = null;//log日志存放路径
     public static final String savePath = "/Flying/Crash";
     private static CrashToFile instance;
     private CrashToFile(){}
@@ -84,13 +85,12 @@ public class CrashToFile extends BaseFile {
 
     @Override
     public void writeToFile(char type, String tag, String msg) {
-        logPath = getFilePath(mContent);
         if (null == logPath) {
             Log.e(TAG,"logPath == null ，未初始化CrashToFile");
             return;
         }
 
-        String fileName = logPath + "/log_" + dateFormatFile.format(date) + ".log";//log日志名，使用时间命名，保证不重复  以天为单位  每天都有新的日志文件生成
+        String fileName = logPath + "/crash_" + dateFormatFile.format(date) + ".log";//log日志名，使用时间命名，保证不重复  以天为单位  每天都有新的日志文件生成
         String segmentationLine = "**************************************************************";
         String log = segmentationLine + "\n" + dateFormatLog.format(new Date()) + " " + type + " " + tag + "\n" + "" + msg + "\n";//log日志内容，可以自行定制
 
@@ -119,7 +119,6 @@ public class CrashToFile extends BaseFile {
                 e.printStackTrace();
             }
         }
-
     }
 
     @Override

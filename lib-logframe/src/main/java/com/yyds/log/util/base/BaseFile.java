@@ -24,7 +24,6 @@ public abstract class BaseFile {
     public static final char ERROR = 'e';
     public static final char WTF = 'f';
 
-    public static String logPath = null;//log日志存放路径
     public static SimpleDateFormat dateFormatLog = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);//日期格式;
     public static SimpleDateFormat dateFormatFile = new SimpleDateFormat("yyyy-MM-dd", Locale.US);//日期格式;
     public static List<File> mFileList = new ArrayList<>();
