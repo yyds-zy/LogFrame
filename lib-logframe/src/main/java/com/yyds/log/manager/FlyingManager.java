@@ -25,47 +25,47 @@ public class FlyingManager {
         return instance;
     }
 
-    public void initFrame(Application application,boolean isDebug) {
+    public void initFrame(Application application,boolean isDebug,int logLevel,int logSaveDays) {
         // register本地异常捕捉
         CrashHandler.register(application);
         //初始化日志框架
         LogUtils.with(application, isDebug)
-                .setLogLevel(5)
-                .setLogDeleteDays(5)
+                .setLogLevel(logLevel)
+                .setLogDeleteDays(logSaveDays)
                 .autoDeleteLogFile();
 
         //初始化异常日志框架
         CrashUtils.with(application,isDebug)
-                .setCrashDeleteDays(5)
+                .setCrashDeleteDays(logSaveDays)
                 .autoDeleteCrashFile();
 
         //初始化http请求数据框架
         JsonUtils.with(application,isDebug)
-                .setJsonDeleteDays(5)
+                .setJsonDeleteDays(logSaveDays)
                 .autoDeleteJsonFile();
     }
 
-    public void initLogFrame (Application application,boolean isDebug){
+    public void initLogFrame (Application application,boolean isDebug,int logLevel,int logSaveDays){
         //初始化日志框架
         LogUtils.with(application, isDebug)
-                .setLogLevel(5)
-                .setLogDeleteDays(5)
+                .setLogLevel(logLevel)
+                .setLogDeleteDays(logSaveDays)
                 .autoDeleteLogFile();
     }
 
-    public void initCrashFrame(Application application,boolean isDebug) {
+    public void initCrashFrame(Application application,boolean isDebug,int logSaveDays) {
         // register本地异常捕捉
         CrashHandler.register(application);
         //初始化异常日志框架
         CrashUtils.with(application,isDebug)
-                .setCrashDeleteDays(5)
+                .setCrashDeleteDays(logSaveDays)
                 .autoDeleteCrashFile();
     }
 
-    public void initJsonFrame(Application application,boolean isDebug) {
+    public void initJsonFrame(Application application,boolean isDebug,int logSaveDays) {
         //初始化http请求数据框架
         JsonUtils.with(application,isDebug)
-                .setJsonDeleteDays(5)
+                .setJsonDeleteDays(logSaveDays)
                 .autoDeleteJsonFile();
     }
 }
