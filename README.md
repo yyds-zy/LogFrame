@@ -27,7 +27,7 @@
 ### 输出日志
 LogUtils.v("Hello Android");
 ### 初始化日志框架且设置日志是否输出   isDebug = true 打印 且 创建日志文件   false 不打印 但 创建日志文件
-LogUtils.initialize(application,BuildConfig.DEBUG);
+LogUtils.with(application,BuildConfig.DEBUG);
 ### 设置日志级别 0~5 值越大输出日志范围越小
 LogUtils.setLogLevel(5);
 ### 输出设备、系统及应用详细信息
