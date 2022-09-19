@@ -81,24 +81,10 @@ Use it in your own code:
 
 Application:
 ```java
-        // register本地异常捕捉
-        CrashHandler.register(application);
-        //初始化日志框架
-        LogUtils.with(application,BuildConfig.DEBUG)
-                .setLogLevel(5).systemOutPutDeviceInfo(DeviceDetailInfo.getDevicesInfo(
-                application, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE))
-                .setLogDeleteDays(5)
-                .autoDeleteLogFile();
-
-        //初始化异常日志框架
-        CrashUtils.with(application,BuildConfig.DEBUG)
-                .setCrashDeleteDays(5)
-                .autoDeleteCrashFile();
-
-        //初始化http请求数据框架
-        JsonUtils.with(application,BuildConfig.DEBUG)
-                .setJsonDeleteDays(5)
-                .autoDeleteJsonFile();
+        FlyingManager.getInstance().initFrame(application,BuildConfig.DEBUG);
+        //输出设备信息
+        String devicesInfo = DeviceDetailInfo.getDevicesInfo(application, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
+        LogUtils.w(devicesInfo);
 ```
 
 Activity:
@@ -112,10 +98,10 @@ Activity:
         LogUtils.wtf("666666666666");
 ```
 
-```
+```java
         JsonUtils.v(json);
 ```
         
-```
+```java
         CrashUtils.e(errorMsg);
 ```
