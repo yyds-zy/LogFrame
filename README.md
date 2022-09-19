@@ -74,16 +74,24 @@ dependencies {
 Use it in your own code:
 
 ```java
+        // register本地异常捕捉
+        CrashHandler.register(application);
         //初始化日志框架
-        LogUtils.initialize(application,BuildConfig.DEBUG);
-        //设置日志级别
-        LogUtils.setLogLevel(5);
-        //输出设备详细信息
-        LogUtils.wtf(DeviceDetailInfo.getDevicesInfo(this, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
-        // 判断是否超过设置日志文件保留时长
-        if (LogToFile.isDeleteLogFile()) {
-            LogToFile.deleteFile();
-        }
+        LogUtils.with(application,BuildConfig.DEBUG)
+                .setLogLevel(5).systemOutPutDeviceInfo(DeviceDetailInfo.getDevicesInfo(
+                application, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE))
+                .setLogDeleteDays(5)
+                .autoDeleteLogFile();
+
+        //初始化异常日志框架
+        CrashUtils.with(application,BuildConfig.DEBUG)
+                .setCrashDeleteDays(5)
+                .autoDeleteCrashFile();
+
+        //初始化http请求数据框架
+        JsonUtils.with(application,BuildConfig.DEBUG)
+                .setJsonDeleteDays(5)
+                .autoDeleteJsonFile();
         LogUtils.v("MainActivity");
         LogUtils.v("111111111111");
         LogUtils.d("222222222222");
