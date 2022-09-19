@@ -25,7 +25,7 @@ public final class CrashUtils {
      *                isDebug = true 打印 且 创建日志文件   false 不打印 但是 创建日志文件
      */
     public static CrashUtils with(Context context, boolean isDebug) {
-        CrashToFile.init(context);
+        CrashToFile.getInstance().init(context);
         sIsDebug = isDebug;
         return new CrashUtils();
     }
@@ -38,7 +38,7 @@ public final class CrashUtils {
         if (isDebuggable()) {
             Log.e(TAG,errorMsg);
         }
-        CrashToFile.e(TAG, errorMsg);
+        CrashToFile.getInstance().e(TAG, errorMsg);
     }
 
     /**
@@ -47,8 +47,8 @@ public final class CrashUtils {
      */
     public CrashUtils autoDeleteCrashFile () {
         // 判断是否超过设置日志文件保留时长
-        if (CrashToFile.isDeleteLogFile()) {
-            CrashToFile.deleteFile();
+        if (CrashToFile.getInstance().isDeleteLogFile()) {
+            CrashToFile.getInstance().deleteFile();
         }
         return this;
     }
@@ -59,7 +59,7 @@ public final class CrashUtils {
      * @return
      */
     public CrashUtils setCrashDeleteDays(int days){
-        CrashToFile.setFileSaveDays(days);
+        CrashToFile.getInstance().setFileSaveDays(days);
         return this;
     }
 }

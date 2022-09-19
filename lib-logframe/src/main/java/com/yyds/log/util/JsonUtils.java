@@ -26,7 +26,7 @@ public class JsonUtils {
      *                isDebug = true 打印 且 创建日志文件   false 不打印 但是 创建日志文件
      */
     public static JsonUtils with(Context context, boolean isDebug) {
-        JsonToFile.init(context);
+        JsonToFile.getInstance().init(context);
         sIsDebug = isDebug;
         return new JsonUtils();
     }
@@ -39,7 +39,7 @@ public class JsonUtils {
         if (isDebuggable()) {
             Log.v(TAG,errorMsg);
         }
-        JsonToFile.v(TAG, errorMsg);
+        JsonToFile.getInstance().v(TAG, errorMsg);
     }
 
     /**
@@ -48,8 +48,8 @@ public class JsonUtils {
      */
     public JsonUtils autoDeleteJsonFile () {
         // 判断是否超过设置日志文件保留时长
-        if (JsonToFile.isDeleteLogFile()) {
-            JsonToFile.deleteFile();
+        if (JsonToFile.getInstance().isDeleteLogFile()) {
+            JsonToFile.getInstance().deleteFile();
         }
         return this;
     }
@@ -60,7 +60,7 @@ public class JsonUtils {
      * @return
      */
     public JsonUtils setJsonDeleteDays(int days){
-        JsonToFile.setFileSaveDays(days);
+        JsonToFile.getInstance().setFileSaveDays(days);
         return this;
     }
 }

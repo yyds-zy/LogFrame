@@ -2,46 +2,40 @@ package com.yyds.log.util.crash;
 
 import android.content.Context;
 import android.util.Log;
-
+import com.yyds.log.util.base.BaseFile;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
-public class CrashToFile {
+public class CrashToFile extends BaseFile {
 
-    public static final String TAG = "[flying-log]";
-    private static String logPath = null;//log日志存放路径
-
-    private static SimpleDateFormat dateFormatLog = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);//日期格式;
-    private static SimpleDateFormat dateFormatFile = new SimpleDateFormat("yyyy-MM-dd", Locale.US);//日期格式;
     public static final String savePath = "/Flying/Crash";
-    public static List<File> mFileList = new ArrayList<>();
-    private static Date date = new Date();//因为log日志是使用日期命名的，使用静态成员变量主要是为了在整个程序运行期间只存在一个.log文件中;
-    private static Context mContent;
-    //日志文件保留时长  默认7天
-    public static int FILE_SAVE_DAYS = 7;
+    private static CrashToFile instance;
+    private CrashToFile(){}
 
-    /**
-     * 设置日志文件保留时长
-     * @param saveDays
-     */
-    public static void setFileSaveDays(int saveDays){
+    public static CrashToFile getInstance() {
+        if (instance == null) {
+            synchronized (CrashToFile.class) {
+                if (instance == null) {
+                    instance = new CrashToFile();
+                }
+            }
+        }
+        return instance;
+    }
+
+    @Override
+    public void setFileSaveDays(int saveDays){
         FILE_SAVE_DAYS = saveDays;
     }
 
-    /**
-     * 获取日志文件保留时长
-     * @return
-     */
-    public static int getFileSaveDays() {
+    @Override
+    public int getFileSaveDays() {
         return FILE_SAVE_DAYS;
     }
 
@@ -50,7 +44,8 @@ public class CrashToFile {
      *
      * @return
      */
-    private static String getFilePath(Context context) {
+    @Override
+    public String getFilePath(Context context) {
         File dir = new File(context.getExternalCacheDir().getAbsoluteFile() + savePath);
         if (!dir.exists()) {
             dir.mkdirs();
@@ -58,12 +53,8 @@ public class CrashToFile {
         return dir.getPath();//存当前app的文件夹里
     }
 
-    /**
-     * 初始化，须在使用之前设置，最好在Application创建时调用
-     *
-     * @param context
-     */
-    public static void init(Context context) {
+    @Override
+    public void init(Context context) {
         mContent = context;
         logPath = getFilePath(context);//获得文件储存路径
     }
@@ -73,7 +64,8 @@ public class CrashToFile {
      * @param context
      * @return
      */
-    public static boolean isExistsFile(Context context) {
+    @Override
+    public boolean isExistsFile(Context context) {
         File dir = new File(context.getExternalCacheDir().getAbsoluteFile() + savePath);
         if (!dir.exists()) {
             return false;
@@ -82,50 +74,16 @@ public class CrashToFile {
         }
     }
 
-    private static final char VERBOSE = 'v';
-
-    private static final char DEBUG = 'd';
-
-    private static final char INFO = 'i';
-
-    private static final char WARN = 'w';
-
-    private static final char ERROR = 'e';
-
-    private static final char WTF = 'f';
-
-    public static void v(String tag, String msg) {
-        writeToFile(VERBOSE, tag, msg);
-    }
-
-    public static void d(String tag, String msg) {
-        writeToFile(DEBUG, tag, msg);
-    }
-
-    public static void i(String tag, String msg) {
-        writeToFile(INFO, tag, msg);
-    }
-
-    public static void w(String tag, String msg) {
-        writeToFile(WARN, tag, msg);
-    }
-
-    public static void e(String tag, String msg) {
+    public void e(String tag, String msg) {
         writeToFile(ERROR, tag, msg);
     }
 
-    public static void wtf(String tag, String msg) {
+    public void wtf(String tag, String msg) {
         writeToFile(WTF, tag, msg);
     }
 
-    /**
-     * 将log信息写入文件中
-     *
-     * @param type
-     * @param tag
-     * @param msg
-     */
-    private static void writeToFile(char type, String tag, String msg) {
+    @Override
+    public void writeToFile(char type, String tag, String msg) {
         logPath = getFilePath(mContent);
         if (null == logPath) {
             Log.e(TAG,"logPath == null ，未初始化CrashToFile");
@@ -164,12 +122,8 @@ public class CrashToFile {
 
     }
 
-    /**
-     * 获取.log文件列表
-     *
-     * @return
-     */
-    public static List<File> getFileList() {
+    @Override
+    public List<File> getFileList() {
         logPath = getFilePath(mContent);
         if (null == logPath) {
             Log.e(TAG,"logPath == null ，未初始化CrashToFile");
@@ -194,11 +148,8 @@ public class CrashToFile {
         return mFileList;
     }
 
-    /**
-     * 是否删除日志文件
-     * @return true delete  false no_delete
-     */
-    public static boolean isDeleteLogFile() {
+    @Override
+    public boolean isDeleteLogFile() {
         List<File> fileList = getFileList();
         if (fileList == null)
             return false;
@@ -209,10 +160,8 @@ public class CrashToFile {
         }
     }
 
-    /**
-     *  删除日志文件
-     */
-    public static void deleteFile(){
+    @Override
+    public void deleteFile(){
         List<File> fileList = getFileList();
         if (fileList == null) return;
         if (fileList.size() > getFileSaveDays()) {

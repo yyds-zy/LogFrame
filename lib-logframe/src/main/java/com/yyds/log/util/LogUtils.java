@@ -33,7 +33,7 @@ public class LogUtils {
      *                isDebug = true 打印 且 创建日志文件   false 不打印 但是 创建日志文件
      */
     public static LogUtils with(Context context,boolean isDebug) {
-        LogToFile.init(context);
+        LogToFile.getInstance().init(context);
         sIsDebug = isDebug;
         return new LogUtils();
     }
@@ -71,7 +71,7 @@ public class LogUtils {
             if (isDebuggable()) {
                 Log.e(TAG,log);
             }
-            LogToFile.e(TAG, log);
+            LogToFile.getInstance().e(TAG, log);
         }
     }
 
@@ -88,7 +88,7 @@ public class LogUtils {
             if (isDebuggable()) {
                 Log.e(TAG,log,e);
             }
-            LogToFile.e(TAG, log + e.getMessage());
+            LogToFile.getInstance().e(TAG, log + e.getMessage());
         }
     }
 
@@ -99,7 +99,7 @@ public class LogUtils {
             if (isDebuggable()) {
                 Log.i(TAG,log);
             }
-            LogToFile.i(TAG, log);
+            LogToFile.getInstance().i(TAG, log);
         }
     }
 
@@ -110,7 +110,7 @@ public class LogUtils {
             if (isDebuggable()) {
                 Log.d(TAG,log);
             }
-            LogToFile.d(TAG, log);
+            LogToFile.getInstance().d(TAG, log);
         }
     }
 
@@ -121,7 +121,7 @@ public class LogUtils {
             if (isDebuggable()) {
                 Log.v(TAG,log);
             }
-            LogToFile.v(TAG, log);
+            LogToFile.getInstance().v(TAG, log);
         }
     }
 
@@ -132,7 +132,7 @@ public class LogUtils {
             if (isDebuggable()) {
                 Log.w(TAG,log);
             }
-            LogToFile.w(TAG, log);
+            LogToFile.getInstance().w(TAG, log);
         }
     }
 
@@ -143,7 +143,7 @@ public class LogUtils {
             if (isDebuggable()) {
                 Log.wtf(TAG,log);
             }
-            LogToFile.wtf(TAG, log);
+            LogToFile.getInstance().wtf(TAG, log);
         }
     }
 
@@ -174,8 +174,8 @@ public class LogUtils {
      */
     public LogUtils autoDeleteLogFile () {
         // 判断是否超过设置日志文件保留时长
-        if (LogToFile.isDeleteLogFile()) {
-            LogToFile.deleteFile();
+        if (LogToFile.getInstance().isDeleteLogFile()) {
+            LogToFile.getInstance().deleteFile();
         }
         return this;
     }
@@ -186,7 +186,7 @@ public class LogUtils {
      * @return
      */
     public LogUtils setLogDeleteDays(int days){
-        LogToFile.setFileSaveDays(days);
+        LogToFile.getInstance().setFileSaveDays(days);
         return this;
     }
 }
