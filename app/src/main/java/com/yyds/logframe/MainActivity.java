@@ -3,11 +3,13 @@ package com.yyds.logframe;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.yyds.log.util.CrashUtils;
 import com.yyds.log.util.DeviceDetailInfo;
 import com.yyds.log.util.JsonUtils;
 import com.yyds.log.util.LogUtils;
+import com.yyds.logframe.app.AppApplication;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +17,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TextView textView = findViewById(R.id.text);
+        //输出设备信息
+        String devicesInfo = DeviceDetailInfo.getDevicesInfo(AppApplication.application, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
+        textView.setText(devicesInfo);
+        LogUtils.wtf(devicesInfo);
         LogUtils.v("MainActivity");
         LogUtils.v("111111111111");
         LogUtils.d("222222222222");
