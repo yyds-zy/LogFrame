@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.yyds.log.util.CrashUtils;
 import com.yyds.log.util.DeviceDetailInfo;
+import com.yyds.log.util.JsonUtils;
 import com.yyds.log.util.LogUtils;
 
 public class MainActivity extends AppCompatActivity {

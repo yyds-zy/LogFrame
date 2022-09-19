@@ -3,6 +3,8 @@ package com.yyds.log.util;
 import android.content.Context;
 import android.util.Log;
 
+import com.yyds.log.util.log.LogToFile;
+
 public class LogUtils {
 
     private static final String TAG = "[flying-log]";
@@ -25,23 +27,15 @@ public class LogUtils {
     }
 
     /**
-     * 设置日志打印等级，login之前调用，不设置默认打印等级为0
-     *
-     * @param log_level 日志等级0~5, 0=verbose,1=debug,2=info,3=warn,4=error 5=failtal
-     */
-    public static void setLogLevel(int log_level) {
-        mLog_level = log_level;
-    }
-
-    /**
      * 初始化,在自定义Application类调用
      *
      * @param isDebug 是否打印log,建议传入BuildConfig.DEBUG
      *                isDebug = true 打印 且 创建日志文件   false 不打印 但是 创建日志文件
      */
-    public static void initialize(Context context,boolean isDebug) {
+    public static LogUtils with(Context context,boolean isDebug) {
         LogToFile.init(context);
         sIsDebug = isDebug;
+        return new LogUtils();
     }
 
     private static boolean isDebuggable() {
@@ -151,5 +145,48 @@ public class LogUtils {
             }
             LogToFile.wtf(TAG, log);
         }
+    }
+
+    /**
+     * 设置日志打印等级，login之前调用，不设置默认打印等级为0
+     *
+     * @param log_level 日志等级0~5, 0=verbose,1=debug,2=info,3=warn,4=error 5=failtal
+     */
+    public LogUtils setLogLevel(int log_level) {
+        mLog_level = log_level;
+        return this;
+    }
+
+    /**
+     *
+     * 输出设备详细信息
+     * @param deviceInfo
+     * @return
+     */
+    public LogUtils systemOutPutDeviceInfo(String deviceInfo) {
+        wtf(deviceInfo);
+        return this;
+    }
+
+    /**
+     * 自动删除日志
+     * @return
+     */
+    public LogUtils autoDeleteLogFile () {
+        // 判断是否超过设置日志文件保留时长
+        if (LogToFile.isDeleteLogFile()) {
+            LogToFile.deleteFile();
+        }
+        return this;
+    }
+
+    /**
+     * 设置日志删除天数
+     * @param days
+     * @return
+     */
+    public LogUtils setLogDeleteDays(int days){
+        LogToFile.setFileSaveDays(days);
+        return this;
     }
 }

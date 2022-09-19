@@ -1,7 +1,8 @@
-package com.yyds.log.util;
+package com.yyds.log.util.json;
 
 import android.content.Context;
 import android.util.Log;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,14 +15,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class LogToFile {
+public class JsonToFile {
 
     public static final String TAG = "[flying-log]";
     private static String logPath = null;//log日志存放路径
 
     private static SimpleDateFormat dateFormatLog = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);//日期格式;
     private static SimpleDateFormat dateFormatFile = new SimpleDateFormat("yyyy-MM-dd", Locale.US);//日期格式;
-    public static final String savePath = "/LogFile/Logs";
+    public static final String savePath = "/LogFile/Json";
     public static List<File> mFileList = new ArrayList<>();
     private static Date date = new Date();//因为log日志是使用日期命名的，使用静态成员变量主要是为了在整个程序运行期间只存在一个.log文件中;
     private static Context mContent;
@@ -127,7 +128,7 @@ public class LogToFile {
     private static void writeToFile(char type, String tag, String msg) {
         logPath = getFilePath(mContent);
         if (null == logPath) {
-            Log.e(TAG,"logPath == null ，未初始化LogToFile");
+            Log.e(TAG,"logPath == null ，未初始化JsonToFile");
             return;
         }
 
@@ -160,7 +161,6 @@ public class LogToFile {
                 e.printStackTrace();
             }
         }
-
     }
 
     /**
@@ -171,7 +171,7 @@ public class LogToFile {
     public static List<File> getFileList() {
         logPath = getFilePath(mContent);
         if (null == logPath) {
-            Log.e(TAG,"logPath == null ，未初始化LogToFile");
+            Log.e(TAG,"logPath == null ，未初始化JsonToFile");
             return null;
         }
         mFileList.clear();
