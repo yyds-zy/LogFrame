@@ -54,7 +54,7 @@ allprojects {
 }
 
 dependencies {
-   implementation 'com.github.yyds-zy:LogFrame:1.0.0'
+   implementation 'com.github.yyds-zy:LogFrame:1.0.1'
 }
 ```
 
