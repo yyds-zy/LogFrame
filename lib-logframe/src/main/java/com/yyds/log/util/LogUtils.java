@@ -158,17 +158,6 @@ public class LogUtils {
     }
 
     /**
-     *
-     * 输出设备详细信息
-     * @param deviceInfo
-     * @return
-     */
-    public LogUtils systemOutPutDeviceInfo(String deviceInfo) {
-        wtf(deviceInfo);
-        return this;
-    }
-
-    /**
      * 自动删除日志
      * @return
      */

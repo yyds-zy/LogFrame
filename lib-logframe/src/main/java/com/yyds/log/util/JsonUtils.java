@@ -2,8 +2,6 @@ package com.yyds.log.util;
 
 import android.content.Context;
 import android.util.Log;
-
-import com.yyds.log.util.crash.CrashToFile;
 import com.yyds.log.util.json.JsonToFile;
 
 /**

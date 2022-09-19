@@ -1,12 +1,8 @@
 package com.yyds.logframe.app;
 
 import android.app.Application;
-
-import com.yyds.log.manager.CrashHandler;
-import com.yyds.log.util.CrashUtils;
+import com.yyds.log.manager.FlyingManager;
 import com.yyds.log.util.DeviceDetailInfo;
-import com.yyds.log.util.JsonUtils;
-import com.yyds.log.util.log.LogToFile;
 import com.yyds.log.util.LogUtils;
 import com.yyds.logframe.BuildConfig;
 
@@ -21,23 +17,9 @@ public class AppApplication extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
-        // register本地异常捕捉
-        CrashHandler.register(application);
-        //初始化日志框架
-        LogUtils.with(application,BuildConfig.DEBUG)
-                .setLogLevel(5).systemOutPutDeviceInfo(DeviceDetailInfo.getDevicesInfo(
-                application, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE))
-                .setLogDeleteDays(5)
-                .autoDeleteLogFile();
-
-        //初始化异常日志框架
-        CrashUtils.with(application,BuildConfig.DEBUG)
-                .setCrashDeleteDays(5)
-                .autoDeleteCrashFile();
-
-        //初始化http请求数据框架
-        JsonUtils.with(application,BuildConfig.DEBUG)
-                .setJsonDeleteDays(5)
-                .autoDeleteJsonFile();
+        FlyingManager.getInstance().initFrame(application,BuildConfig.DEBUG);
+        //输出设备信息
+        String devicesInfo = DeviceDetailInfo.getDevicesInfo(application, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
+        LogUtils.w(devicesInfo);
     }
 }
