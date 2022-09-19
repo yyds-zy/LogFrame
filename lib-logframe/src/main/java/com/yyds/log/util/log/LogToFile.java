@@ -21,7 +21,7 @@ public class LogToFile {
 
     private static SimpleDateFormat dateFormatLog = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);//日期格式;
     private static SimpleDateFormat dateFormatFile = new SimpleDateFormat("yyyy-MM-dd", Locale.US);//日期格式;
-    public static final String savePath = "/LogFile/Logs";
+    public static final String savePath = "/Flying/Logs";
     public static List<File> mFileList = new ArrayList<>();
     private static Date date = new Date();//因为log日志是使用日期命名的，使用静态成员变量主要是为了在整个程序运行期间只存在一个.log文件中;
     private static Context mContent;
