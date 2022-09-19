@@ -54,7 +54,7 @@ allprojects {
 }
 
 dependencies {
-   implementation 'com.github.yyds-zy:LogFrame:1.0.1'
+   implementation 'com.github.yyds-zy:LogFrame:1.0.2'
 }
 ```
 
@@ -72,7 +72,7 @@ dependencies {
 <dependency>
       <groupId>com.github.yyds-zy</groupId>
       <artifactId>LogFrame</artifactId>
-      <version>1.0.1</version>
+      <version>1.0.2</version>
 </dependency>
 
 ```
