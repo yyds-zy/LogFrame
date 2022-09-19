@@ -1,5 +1,11 @@
-# LogFrame
-安卓日志框架，为了更加安全高效的查看定位问题，设计了LogFrame这款本地&amp;远程操作的日志框架。
+# FlyingLogFrame
+安卓日志框架，为了更加安全高效的查看定位问题，设计了FlyingLogFrame这款本地&amp;远程操作的日志框架。
+
+## 框架结构
+#### Flying
+- LogUtils (项目中需要输出的日志)
+- CrashUtils （异常崩溃信息，由CrashHandle处理）
+- JsonUtils （项目中网络请求信息与响应信息的输出）
 
 ## 框架功能点
 ### 自动化保存Log
@@ -73,6 +79,7 @@ dependencies {
 
 Use it in your own code:
 
+Application:
 ```java
         // register本地异常捕捉
         CrashHandler.register(application);
@@ -92,6 +99,14 @@ Use it in your own code:
         JsonUtils.with(application,BuildConfig.DEBUG)
                 .setJsonDeleteDays(5)
                 .autoDeleteJsonFile();
+        
+        
+        JsonUtils.v(json);
+        
+        CrashUtils.e(errorMsg);
+```
+
+```
         LogUtils.v("MainActivity");
         LogUtils.v("111111111111");
         LogUtils.d("222222222222");
@@ -99,4 +114,13 @@ Use it in your own code:
         LogUtils.e("444444444444");
         LogUtils.w("555555555555");
         LogUtils.wtf("666666666666");
-```	
+```
+
+Activity:
+```
+        JsonUtils.v(json);
+```
+        
+```
+        CrashUtils.e(errorMsg);
+```
