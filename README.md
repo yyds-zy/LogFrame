@@ -33,13 +33,13 @@ LogUtils.setLogLevel(5);
 ### 输出设备、系统及应用详细信息
 LogUtils.v(DeviceDetailInfo.getDevicesInfo(this, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
 ### 设置保存文件时长
-LogToFile.setFileSaveDays(15);
+LogToFile.getIntance().setFileSaveDays(15);
 ### 是否超过日志文件保存时长
-LogToFile.isDeleteLogFile() true 为超过
+LogToFile.getIntance().isDeleteLogFile() true 为超过
 ### 删除超过保存时长的所有文件及未超过的只剩下当前时间日的日志文件
-LogToFile.deleteFile();
+LogToFile.getIntance().deleteFile();
 ### 获取文件列表
-LogToFile.getFileList();
+LogToFile.getIntance().getFileList();
 
 ### Usage
 ----
