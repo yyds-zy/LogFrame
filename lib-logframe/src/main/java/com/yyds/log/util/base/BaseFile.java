@@ -29,6 +29,7 @@ public abstract class BaseFile {
     public static List<File> mFileList = new ArrayList<>();
     public static Date date = new Date();//因为log日志是使用日期命名的，使用静态成员变量主要是为了在整个程序运行期间只存在一个.log文件中;
     public static int FILE_SAVE_DAYS = 7;//日志文件保留时长  默认7天
+    public static boolean mIsEncode;
     public static Context mContent;
 
     //设置日志文件保留时长
@@ -57,4 +58,7 @@ public abstract class BaseFile {
 
     //删除日志文件
     public abstract void deleteFile();
+
+    //设置是否加密
+    public abstract void setIsEncode(boolean isEncode);
 }

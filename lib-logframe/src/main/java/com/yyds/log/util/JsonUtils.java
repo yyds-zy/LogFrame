@@ -3,6 +3,7 @@ package com.yyds.log.util;
 import android.content.Context;
 import android.util.Log;
 import com.yyds.log.util.json.JsonToFile;
+import com.yyds.log.util.log.LogToFile;
 
 /**
  * Created by 阿飞の小蝴蝶 on 2022/9/19
@@ -59,6 +60,16 @@ public class JsonUtils {
      */
     public JsonUtils setJsonDeleteDays(int days){
         JsonToFile.getInstance().setFileSaveDays(days);
+        return this;
+    }
+
+    /**
+     * 是否设置编码
+     * @param isEncode
+     * @return
+     */
+    public JsonUtils setIsEncode(boolean isEncode){
+        JsonToFile.getInstance().setIsEncode(isEncode);
         return this;
     }
 }

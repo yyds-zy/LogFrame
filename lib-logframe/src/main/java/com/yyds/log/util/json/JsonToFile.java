@@ -3,6 +3,7 @@ package com.yyds.log.util.json;
 import android.content.Context;
 import android.util.Log;
 
+import com.yyds.log.util.Base64Util;
 import com.yyds.log.util.base.BaseFile;
 import com.yyds.log.util.crash.CrashToFile;
 
@@ -86,6 +87,10 @@ public class JsonToFile extends BaseFile {
         String segmentationLine = "**************************************************************";
         String log = segmentationLine + "\n" + dateFormatLog.format(new Date()) + " " + type + " " + tag + "\n" + "" + msg + "\n";//log日志内容，可以自行定制
 
+        if (mIsEncode) {
+            log = Base64Util.encodeWord(log);
+        }
+
         //如果父路径不存在
         File file = new File(logPath);
         if (!file.exists()) {
@@ -167,5 +172,10 @@ public class JsonToFile extends BaseFile {
                 }
             }
         }
+    }
+
+    @Override
+    public void setIsEncode(boolean isEncode) {
+        mIsEncode = isEncode;
     }
 }

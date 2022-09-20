@@ -178,4 +178,14 @@ public class LogUtils {
         LogToFile.getInstance().setFileSaveDays(days);
         return this;
     }
+
+    /**
+     * 是否设置编码
+     * @param isEncode
+     * @return
+     */
+    public LogUtils setIsEncode(boolean isEncode){
+        LogToFile.getInstance().setIsEncode(isEncode);
+        return this;
+    }
 }

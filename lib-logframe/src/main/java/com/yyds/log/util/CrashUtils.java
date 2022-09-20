@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.yyds.log.util.crash.CrashToFile;
+import com.yyds.log.util.json.JsonToFile;
 
 /**
  * Created by 阿飞の小蝴蝶 on 2022/9/19
@@ -60,6 +61,16 @@ public final class CrashUtils {
      */
     public CrashUtils setCrashDeleteDays(int days){
         CrashToFile.getInstance().setFileSaveDays(days);
+        return this;
+    }
+
+    /**
+     * 是否设置编码
+     * @param isEncode
+     * @return
+     */
+    public CrashUtils setIsEncode(boolean isEncode){
+        CrashToFile.getInstance().setIsEncode(isEncode);
         return this;
     }
 }

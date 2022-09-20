@@ -25,47 +25,53 @@ public class FlyingManager {
         return instance;
     }
 
-    public void initFrame(Application application,boolean isDebug,int logLevel,int logSaveDays) {
+    public void initFrame(Application application,boolean isDebug,int logLevel,int logSaveDays,boolean isEncode) {
         // register本地异常捕捉
         CrashHandler.register(application);
         //初始化日志框架
         LogUtils.with(application, isDebug)
                 .setLogLevel(logLevel)
                 .setLogDeleteDays(logSaveDays)
+                .setIsEncode(isEncode)
                 .autoDeleteLogFile();
 
         //初始化异常日志框架
         CrashUtils.with(application,isDebug)
                 .setCrashDeleteDays(logSaveDays)
+                .setIsEncode(isEncode)
                 .autoDeleteCrashFile();
 
         //初始化http请求数据框架
         JsonUtils.with(application,isDebug)
                 .setJsonDeleteDays(logSaveDays)
+                .setIsEncode(isEncode)
                 .autoDeleteJsonFile();
     }
 
-    public void initLogFrame (Application application,boolean isDebug,int logLevel,int logSaveDays){
+    public void initLogFrame (Application application,boolean isDebug,int logLevel,int logSaveDays,boolean isEncode){
         //初始化日志框架
         LogUtils.with(application, isDebug)
                 .setLogLevel(logLevel)
                 .setLogDeleteDays(logSaveDays)
+                .setIsEncode(isEncode)
                 .autoDeleteLogFile();
     }
 
-    public void initCrashFrame(Application application,boolean isDebug,int logSaveDays) {
+    public void initCrashFrame(Application application,boolean isDebug,int logSaveDays,boolean isEncode) {
         // register本地异常捕捉
         CrashHandler.register(application);
         //初始化异常日志框架
         CrashUtils.with(application,isDebug)
                 .setCrashDeleteDays(logSaveDays)
+                .setIsEncode(isEncode)
                 .autoDeleteCrashFile();
     }
 
-    public void initJsonFrame(Application application,boolean isDebug,int logSaveDays) {
+    public void initJsonFrame(Application application,boolean isDebug,int logSaveDays,boolean isEncode) {
         //初始化http请求数据框架
         JsonUtils.with(application,isDebug)
                 .setJsonDeleteDays(logSaveDays)
+                .setIsEncode(isEncode)
                 .autoDeleteJsonFile();
     }
 }
