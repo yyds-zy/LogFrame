@@ -15,6 +15,6 @@ public class AppApplication extends Application {
     public void onCreate() {
         super.onCreate();
         application = this;
-        FlyingManager.getInstance().initFrame(application,BuildConfig.DEBUG,0,5,true);
+        FlyingManager.getInstance().initFrame(application,BuildConfig.DEBUG,0,5,false);
     }
 }

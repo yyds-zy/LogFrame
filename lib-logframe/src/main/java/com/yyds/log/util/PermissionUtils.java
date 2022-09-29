@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
 
+import androidx.annotation.ChecksSdkIntAtLeast;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -29,6 +31,7 @@ public class PermissionUtils {
     /**
      * 是否是 Android 11 及以上版本
      */
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.R)
     static boolean isAndroid11() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.R;
     }
@@ -36,6 +39,7 @@ public class PermissionUtils {
     /**
      * 是否是 Android 10 及以上版本
      */
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.Q)
     static boolean isAndroid10() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q;
     }
@@ -43,6 +47,7 @@ public class PermissionUtils {
     /**
      * 是否是 Android 9.0 及以上版本
      */
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.P)
     static boolean isAndroid9() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.P;
     }
@@ -50,6 +55,7 @@ public class PermissionUtils {
     /**
      * 是否是 Android 8.0 及以上版本
      */
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.O)
     static boolean isAndroid8() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
     }
@@ -57,6 +63,7 @@ public class PermissionUtils {
     /**
      * 是否是 Android 7.0 及以上版本
      */
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.N)
     static boolean isAndroid7() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
     }
@@ -64,6 +71,7 @@ public class PermissionUtils {
     /**
      * 是否是 Android 6.0 及以上版本
      */
+    @ChecksSdkIntAtLeast(api = Build.VERSION_CODES.M)
     static boolean isAndroid6() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
