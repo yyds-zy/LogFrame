@@ -81,7 +81,16 @@ Use it in your own code:
 
 Application:
 ```java
-        FlyingManager.getInstance().initFrame(application,BuildConfig.DEBUG);
+        使用方式：
+        方案一：
+        //初始化所有框架  日志框架&crash框架&Json数据框架
+        FlyingManager.getInstance().initFrame(application,BuildConfig.DEBUG,0,5,false); 
+        方案二：
+        //单独使用初始化
+        FlyingManager.getInstance().initLogFrame(application,BuildConfig.DEBUG,0,5,false); 
+        FlyingManager.getInstance().initCrashFrame(application,BuildConfig.DEBUG,0,5,false); 
+        FlyingManager.getInstance().initJsonFrame(application,BuildConfig.DEBUG,0,5,false); 
+        
         //输出设备信息
         String devicesInfo = DeviceDetailInfo.getDevicesInfo(application, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE);
         LogUtils.w(devicesInfo);
