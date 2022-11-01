@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements OnRequestListener
             List<File> fileList = LogToFile.getInstance().getFileList();
             if (fileList != null) {
                 for(File file : fileList){
-
                     UpLoadFileManager.getInstance().upLoadFile(file,MainActivity.this);
                 }
             }
